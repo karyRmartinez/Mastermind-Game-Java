@@ -2,6 +2,7 @@ package org.example;
 
 import java.util.Scanner;
 
+
 public class Playgame {
 
     private final Scanner scanner;
@@ -47,6 +48,5 @@ public class Playgame {
                 System.out.println("Invalid choice. Please enter a valid option.");
         }
     }
-
 
 }
