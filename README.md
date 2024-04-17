@@ -2,6 +2,10 @@
 
 Welcome to the Mastermind Game project! This project is a command-line implementation of the classic Mastermind code-breaking game. 
 
+## Build and Runtime Requirements
++ JDK 17 or later
++ IntelliJ IDEA 
+
 ## Features
 
 - Generate a random secret code consisting of 4 distinct numbers from 0 to 7.
