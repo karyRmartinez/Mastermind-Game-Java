@@ -16,4 +16,8 @@ public class Gamefeedback {
                 ", correctLocation=" + correctLocation +
                 '}';
     }
+
+    public boolean correctWinningGuess() {
+        return correct == Gamelogic.CODE_LENGTH && correctLocation ==Gamelogic.CODE_LENGTH;
+    }
 }
