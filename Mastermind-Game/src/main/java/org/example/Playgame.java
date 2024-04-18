@@ -24,12 +24,14 @@ public class Playgame {
             System.out.println("2. Quit game");
             System.out.print("Enter your choice (1, 2): ");
 
-            int choice = 0;
+           // int choice = 0;
+            int choice;
+            String userInput = scanner.nextLine().trim();
             try {
-                choice = Integer.parseInt(scanner.nextLine().trim());
+                choice = Integer.parseInt(userInput);
             } catch (NumberFormatException e) {
                 System.out.println("Invalid choice. Please enter a valid option.");
-
+                continue;
             }
 
 
@@ -48,12 +50,14 @@ public class Playgame {
 
                     if (feedback.correctWinningGuess()) {
                         System.out.println("Congratulations! You guessed the secret code!");
-                        return;
+                      // return;
+                        break;
                     }
 
                     if (!logic.hasAttemptsLeft()) {
                         System.out.println("\nYou've used all your attempts! The secret code was: " + logic.getSecretCode());
-                        return;
+                        //return;
+                        break;
                     }
                     break;
 
@@ -65,7 +69,10 @@ public class Playgame {
 
                 default:
                     System.out.println("Invalid choice. Please enter a valid option.");
+                    break;
             }
         }
+        // bug testing
+        scanner.close();
     }
 }

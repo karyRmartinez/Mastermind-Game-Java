@@ -10,9 +10,9 @@ public class Gamelogic {
     private static final int MAX_ATTEMPTS = 10;
     private int attemptsLeft;
     private final List<GuessEntry> historyAttempts;
-
-
     private final List<Integer> secretCode;
+
+
     public Gamelogic() {
         secretCode = NumbersAPI.generateSecretCode(CODE_LENGTH);
         historyAttempts = new ArrayList<>();
@@ -35,15 +35,32 @@ public class Gamelogic {
             }
         }
 
-        //  numbers in wrong locations
+        //
+//        for (int i = 0; i < CODE_LENGTH; i++) {
+//            int guessedNum = guessCopy.get(i);
+//            int index = secretCopy.indexOf(guessedNum);
+////            if (guessedNum != -1 && secretCopy.contains(guessedNum)) {
+////                correctNumbers++;
+////                secretCopy.set(secretCopy.indexOf(guessedNum), -1);
+////            }
+//            if (index != -1) {
+//                correctNumbers++;
+//                // Remove the found number from the secretCopy list to avoid double counting
+//                secretCopy.set(i, -1);
+//               // guessCopy.set(i, -1);
+//            }
+//        }
         for (int i = 0; i < CODE_LENGTH; i++) {
             int guessedNum = guessCopy.get(i);
-            if (guessedNum != -1 && secretCopy.contains(guessedNum)) {
-                correctNumbers++;
-                secretCopy.set(secretCopy.indexOf(guessedNum), -1);
+            if (guessedNum != -1) {
+                int index = secretCopy.indexOf(guessedNum);
+                if (index != -1) {
+                    correctNumbers++;
+                    // Remove the found number from secretCopy to avoid double counting
+                    secretCopy.set(index, -1);
+                }
             }
         }
-
         return new Gamefeedback(correctNumbers, correctLocations);
     }
     public void recordGuess(List<Integer> guess, Gamefeedback feedback) {
@@ -81,6 +98,7 @@ public class Gamelogic {
             String[] parts = input.trim().split("\\s+");
 
             if (parts.length != Gamelogic.CODE_LENGTH) {
+                System.out.println("Invalid input. Please enter " + Gamelogic.CODE_LENGTH + " numbers.");
                 return null;
             }
 
@@ -88,7 +106,7 @@ public class Gamelogic {
             for (String part : parts) {
                 try {
                     int num = Integer.parseInt(part);
-                    if (num < 0 || num >= Gamelogic.MAX_ATTEMPTS || guess.contains(num)) {
+                    if (num < 0 || num >= Gamelogic.MAX_ATTEMPTS ) {
                         return null;
                     }
                     guess.add(num);
