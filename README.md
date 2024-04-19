@@ -34,8 +34,30 @@ Welcome to the Mastermind Game project! This project is a command-line implement
             Gamefeedback feedback = logic.checkGuess(guess);
             logic.recordGuess(guess, feedback);
             System.out.println("Feedback: " + feedback);
-  
+ ## Game flow chart: 
    ```
+  graph TD;
+    Start([Start]) --> |User input: '1'| MakeGuess;
+    Start --> |User input: '2'| QuitGame;
+    
+    MakeGuess --> |User input: guess input| CheckGuess;
+    MakeGuess --> |User input: '1'| InitializeTimer;
+    MakeGuess --> |User input: '2'| CheckTimer;
+    MakeGuess --> |User input: '3'| QuitGame;
+    
+    InitializeTimer --> PlayWithTimer;
+    CheckGuess --> |feedback.correctWinningGuess()| WinGame;
+    CheckGuess --> |!logic.hasAttemptsLeft()| LoseGame;
+    CheckTimer --> |Timer Choice| TimerStatus;
+
+    PlayWithTimer --> MakeGuess;
+
+    WinGame([Win Game]) --> End([End]);
+    LoseGame([Lose Game]) --> End;
+    TimerStatus([Check Timer Status]) --> MakeGuess;
+
+    QuitGame([Quit Game]) --> End;
+```
 
 ## Screenshots
 <img src="Commandline Screenshoot.png" alt="Image Alt Text" style="width:400px; height:250px;">
@@ -44,6 +66,7 @@ Welcome to the Mastermind Game project! This project is a command-line implement
 - https://www.random.org/clients/http/api/
 - Java Utility Timer - Youtube
 - YU Rest workbook
+- Diagram flow chart : https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams
 
  ## Next Steps 
  ### Under construction 👷🏾‍♀️🚧 
