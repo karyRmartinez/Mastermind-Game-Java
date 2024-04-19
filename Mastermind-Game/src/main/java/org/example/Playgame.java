@@ -25,21 +25,27 @@ public class Playgame {
         System.out.println();
 
 
+        int choice = scanner.nextInt();
+       // String userInput = scanner.nextLine().trim();
+        if (choice == 2) {
+            System.out.println("Thank you for playing! Goodbye!");
+            return;
+        }
+
         while (logic.hasAttemptsLeft()) {
             System.out.println("\nAttempts remaining: " + logic.getAttemptsLeft());
-            System.out.print("Enter your choice: ");
+           // System.out.print("Enter your choice: ");
 
 
            // int choice = 0;
 //            System.out.print("Enter your choice: ");
-            int choice;
-            String userInput = scanner.nextLine().trim();
-            try {
-                choice = Integer.parseInt(userInput);
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid choice. Please enter a valid option.");
-                continue;
-            }
+
+//            try {
+//                choice = Integer.parseInt(userInput);
+//            } catch (NumberFormatException e) {
+//                System.out.println("Invalid choice. Please enter a valid option.");
+//                continue;
+//            }
 
 
             switch (choice) {
