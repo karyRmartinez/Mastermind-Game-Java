@@ -2,6 +2,7 @@
 
 Welcome to the Mastermind Game project! This project is a command-line implementation of the classic Mastermind code-breaking game. 
 
+
 ## Build and Runtime Requirements
 + JDK 17 or later
 + IntelliJ IDEA 
@@ -58,6 +59,19 @@ Welcome to the Mastermind Game project! This project is a command-line implement
 
     QuitGame([Quit Game]) --> End;
 ```
+## Game thought process
+### Initialization:
+- The game should start with a welcome message and instructions on how to play.
+- The game waits for user input to either start guessing or exit the game.
+### Secret Code Generation:
+NumbersAPI class generates a secret code using an API call.
+Consider removing reliance on an external API for secret code generation to keep the game self-contained and avoid potential external network issues. Instead, generate a random code locally.
+### Handling User Input:
+Playgame handles user input choices to make a guess or exit.
+Ensure to handle invalid input gracefully by prompting the user to try again.
+### Testing and Iteration:
+Test the game thoroughly to ensure it functions as intended and provides a smooth player experience.
+Gather feedback from players to identify areas for improvement and iterate on your design.
 
 ## Screenshots
 <img src="Commandline Screenshoot.png" alt="Image Alt Text" style="width:400px; height:250px;">
