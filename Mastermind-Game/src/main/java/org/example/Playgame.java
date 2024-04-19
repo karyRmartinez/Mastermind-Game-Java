@@ -14,17 +14,21 @@ public class Playgame {
     }
 
     public void startGame() {
-        System.out.println("Welcome to Mastermind!");
+        System.out.println("********************************************");
+
+        System.out.println("Welcome to the Code Guessing Game!\uD83D\uDD22");
+
+        System.out.println("********************************************");
+        System.out.println("Try to guess the secret code consisting of 4 numbers from 0 to 7.");
+        System.out.println("You have 10 attempts to guess the code. Good luck!");
+        System.out.println("Type '1' to make a guess or '2' to exit the game.");
+        System.out.println();
 
         while (logic.hasAttemptsLeft()) {
             System.out.println("\nAttempts remaining: " + logic.getAttemptsLeft());
 
-            System.out.println("Please choose an option:");
-            System.out.println("1. Make a guess");
-            System.out.println("2. Quit game");
-            System.out.print("Enter your choice (1, 2): ");
-
            // int choice = 0;
+            System.out.print("Enter your choice: ");
             int choice;
             String userInput = scanner.nextLine().trim();
             try {
@@ -50,21 +54,20 @@ public class Playgame {
 
                     if (feedback.correctWinningGuess()) {
                         System.out.println("Congratulations! You guessed the secret code!");
-                      // return;
-                        break;
+                      return;
+
                     }
 
                     if (!logic.hasAttemptsLeft()) {
                         System.out.println("\nYou've used all your attempts! The secret code was: " + logic.getSecretCode());
-                        //return;
-                        break;
+                       return;
                     }
                     break;
 
 
                 case 2:
                     // Quit the game
-                    System.out.println("Thank you for playing! Goodbye.");
+                    System.out.println("Thank you for playing! Goodbye. ");
                     return;
 
                 default:
@@ -72,7 +75,9 @@ public class Playgame {
                     break;
             }
         }
-        // bug testing
+
         scanner.close();
     }
+
+
 }
