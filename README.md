@@ -38,6 +38,7 @@ Welcome to the Mastermind Game project! This project is a command-line implement
    ```
 
 ## Screenshots
+<img src="Commandline Screenshoot.png" alt="Image Alt Text" style="width:400px; height:250px;">
 
 ## Resources
 - https://www.random.org/clients/http/api/
