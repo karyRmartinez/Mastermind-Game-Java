@@ -24,11 +24,14 @@ public class Playgame {
         System.out.println("Type '1' to make a guess or '2' to exit the game.");
         System.out.println();
 
+
         while (logic.hasAttemptsLeft()) {
             System.out.println("\nAttempts remaining: " + logic.getAttemptsLeft());
+            System.out.print("Enter your choice: ");
+
 
            // int choice = 0;
-            System.out.print("Enter your choice: ");
+//            System.out.print("Enter your choice: ");
             int choice;
             String userInput = scanner.nextLine().trim();
             try {
@@ -44,10 +47,12 @@ public class Playgame {
                     // Make a guess
                     System.out.print("Enter your guess (4 different numbers from 0-7, separated by spaces): ");
                     List<Integer> guess = Gamelogic.GameUtils.readGuess(scanner);
+
                     if (guess == null) {
                         System.out.println("Invalid input. Please enter 4 different numbers 0-7");
                         continue;
                     }
+
                     Gamefeedback feedback = logic.checkGuess(guess);
                     logic.recordGuess(guess, feedback);
                     System.out.println("Feedback: " + feedback);

@@ -20,49 +20,46 @@ public class Gamelogic {
     }
 
     public Gamefeedback checkGuess(List<Integer> guess) {
-        int correctNumbers = 0;
-        int correctLocations = 0;
+        int correctNumbers = 0; // Number of correct numbers
+        int correctLocations = 0; // Number of correct numbers in the correct location
 
-        List<Integer> secretCopy = new ArrayList<>(secretCode);
-        List<Integer> guessCopy = new ArrayList<>(guess);
+        // Arrays to track which elements have been matched
+        boolean[] guessMatched = new boolean[CODE_LENGTH];
+        boolean[] secretMatched = new boolean[CODE_LENGTH];
 
-        //  correct locations first
+        // First : Check for correct locations
         for (int i = 0; i < CODE_LENGTH; i++) {
-            if (guessCopy.get(i).equals(secretCopy.get(i))) {
+            if (guess.get(i).equals(secretCode.get(i))) {
                 correctLocations++;
-                secretCopy.set(i, -1);
-                guessCopy.set(i, -1);
+                correctNumbers++;
+                // Mark these positions as matched
+                guessMatched[i] = true;
+                secretMatched[i] = true;
             }
         }
 
-        //
-//        for (int i = 0; i < CODE_LENGTH; i++) {
-//            int guessedNum = guessCopy.get(i);
-//            int index = secretCopy.indexOf(guessedNum);
-////            if (guessedNum != -1 && secretCopy.contains(guessedNum)) {
-////                correctNumbers++;
-////                secretCopy.set(secretCopy.indexOf(guessedNum), -1);
-////            }
-//            if (index != -1) {
-//                correctNumbers++;
-//                // Remove the found number from the secretCopy list to avoid double counting
-//                secretCopy.set(i, -1);
-//               // guessCopy.set(i, -1);
-//            }
-//        }
+        // Second : Check for correct numbers
         for (int i = 0; i < CODE_LENGTH; i++) {
-            int guessedNum = guessCopy.get(i);
-            if (guessedNum != -1) {
-                int index = secretCopy.indexOf(guessedNum);
-                if (index != -1) {
-                    correctNumbers++;
-                    // Remove the found number from secretCopy to avoid double counting
-                    secretCopy.set(index, -1);
+            // Only consider unmatched guess elements
+            if (!guessMatched[i]) {
+                for (int j = 0; j < CODE_LENGTH; j++) {
+                    if (!secretMatched[j] && guess.get(i).equals(secretCode.get(j))) {
+                        correctNumbers++;
+                        secretMatched[j] = true;
+                        break; // Exit the loop once a match is found
+                    }
                 }
             }
         }
+
         return new Gamefeedback(correctNumbers, correctLocations);
     }
+
+
+
+
+
+
     public void recordGuess(List<Integer> guess, Gamefeedback feedback) {
         historyAttempts.add(new GuessEntry(guess, feedback));
         attemptsLeft--;
@@ -92,6 +89,9 @@ public class Gamelogic {
     }
 
 
+
+
+
     public class GameUtils {
         public static List<Integer> readGuess(Scanner scanner) {
             String input = scanner.nextLine();
@@ -106,11 +106,13 @@ public class Gamelogic {
             for (String part : parts) {
                 try {
                     int num = Integer.parseInt(part);
-                    if (num < 0 || num >= Gamelogic.MAX_ATTEMPTS ) {
+                    if (num < 0 || num > 7) {
+                        System.out.println("Invalid input. Numbers should be between 0 and 7.");
                         return null;
                     }
                     guess.add(num);
                 } catch (NumberFormatException e) {
+                    System.out.println("Invalid input. Please enter valid integers.");
                     return null;
                 }
             }
