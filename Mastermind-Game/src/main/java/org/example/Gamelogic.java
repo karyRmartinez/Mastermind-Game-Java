@@ -56,10 +56,6 @@ public class Gamelogic {
     }
 
 
-
-
-
-
     public void recordGuess(List<Integer> guess, Gamefeedback feedback) {
         historyAttempts.add(new GuessEntry(guess, feedback));
         attemptsLeft--;
@@ -77,7 +73,7 @@ public class Gamelogic {
         return secretCode;
     }
 
-    // Inner class to represent a guess entry
+    // Inner class for guess entry
     private static class GuessEntry {
         final List<Integer> guess;
         final Gamefeedback feedback;
@@ -87,9 +83,6 @@ public class Gamelogic {
             this.feedback = feedback;
         }
     }
-
-
-
 
 
     public class GameUtils {
